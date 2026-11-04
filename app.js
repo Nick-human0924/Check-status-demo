@@ -16,7 +16,8 @@ form.addEventListener('submit',async event=>{
   results.append(element('h3','查询结果'));
   for(const record of records){
    const card=element('article','','receipt'),head=element('div','','receipt-head');head.append(element('strong',record.name),element('span',record.status,record.status==='支付成功'?'status success':'status'));card.append(head);
-   const dl=document.createElement('dl');for(const[label,value]of[['账单状态日期',record.date],['账单状态',record.status],['支付方',record.payer]])dl.append(element('dt',label),element('dd',value));card.append(dl);results.append(card);
+   const dl=document.createElement('dl');for(const[label,value]of[['账单状态日期',record.date],['账单状态',record.status],['打款金额（税前）','¥1,000.00'],['支付方',record.payer]])dl.append(element('dt',label),element('dd',value,label==='打款金额（税前）'?'amount-value':undefined));card.append(dl);
+   card.append(element('p','以上为税前金额。因个人适用税率及扣税情况不同，实际到账金额可能有所不同，请以银行实际入账金额为准。','tax-note'));results.append(card);
   }
   results.append(element('p','到账情况以银行实际入账为准。页面闲置2分钟后自动清除。','result-note'));
   const button=element('button','清除本次查询','clear');button.type='button';button.addEventListener('click',clear);results.append(button);results.hidden=false;results.focus();
