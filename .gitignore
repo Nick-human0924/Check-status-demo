@@ -1,0 +1,6 @@
+*.key
+*.enc
+*.xlsx
+*.xls
+.env*
+node_modules/
